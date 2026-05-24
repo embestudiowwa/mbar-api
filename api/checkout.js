@@ -5,15 +5,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const PRODUCT_LINKS = {
-  prod_UYzn62qq9GLPuZ: {
+  prod_UYynxMKGt1CPwd: {
     name: "Nostrand · Full Family",
     url: "https://www.dropbox.com/scl/fi/dlbevkyxph7h2788u17l9/Nostrand-Full_Family.zip?rlkey=3w7ac2wthwtgvewhosqorq5nf&st=aoh5sbk3&dl=1",
   },
-  prod_UYzn6zxrcV9Lq3: {
+  prod_UYyo3NX7WRMdE8: {
     name: "Milky Bar · Full Family",
     url: "https://www.dropbox.com/scl/fi/4anduy1xakqilfn53o1kj/MilkyBar_FullFamily.zip?rlkey=iz0geal2xoo291dttnapd59uf&st=d6mu16rh&dl=1",
   },
-  prod_UYzn6HnI7ezIOb: {
+  prod_UYyoaBaln9ZxEI: {
     name: "Kidcut",
     url: "https://www.dropbox.com/scl/fi/m1t3zd4aaol3eluztmmh1/Kidcut-full.zip?rlkey=2l1k256bw2g1o0ovhuu2g32do&st=6sztnr8w&dl=1",
   },
