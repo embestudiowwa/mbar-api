@@ -75,7 +75,7 @@ export default async function handler(req, res) {
 const downloadLinks = purchasedItems
   .map(
     (item) =>
-      `<li style="margin-bottom: 20px;"><p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${item.name}</p><a href="${item.url}" style="font-size: 16px; color: #555; text-decoration: underline;">Download ${item.name}</a></li>`
+      `<li style="margin-bottom: 20px;"><p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${item.name}</p><a href="${item.url}" style="font-size: 16px; color: #111110; text-decoration: underline;">Download ${item.name}</a></li>`
   )
   .join("");
 
@@ -86,11 +86,11 @@ const downloadLinks = purchasedItems
 html: `
   <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 48px 32px; color: #111110;">
     <h1 style="font-size: 28px; font-weight: 600; margin: 0 0 16px; letter-spacing: -0.02em;">Thank you for your purchase!</h1>
-    <p style="font-size: 16px; color: #555; margin: 0 0 40px; line-height: 1.5;">Your fonts are ready to download. Click the links below to get your files.</p>
+    <p style="font-size: 16px; color: #111110; margin: 0 0 40px; line-height: 1.5;">Your fonts are ready to download. Click the links below to get your files.</p>
     <ul style="list-style: none; padding: 0; margin: 0 0 40px;">
       ${downloadLinks}
     </ul>
-    <p style="font-size: 16px; color: #555; margin: 0 0 8px; line-height: 1.5;">If you have any questions, contact us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
+    <p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you have any questions, contact us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
     <p style="font-size: 16px; color: #111110; margin: 24px 0 0;">— Mbar Type</p>
   </div>
 `,
