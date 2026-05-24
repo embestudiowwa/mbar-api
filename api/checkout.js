@@ -72,28 +72,28 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: "No matching products" });
     }
 
-    const downloadLinks = purchasedItems
-      .map(
-        (item) =>
-          `<li style="margin-bottom: 16px;"><strong>${item.name}</strong><br><a href="${item.url}" style="color: #111110;">Download ${item.name}</a></li>`
-      )
-      .join("");
+const downloadLinks = purchasedItems
+  .map(
+    (item) =>
+      `<li style="margin-bottom: 20px;"><p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${item.name}</p><a href="${item.url}" style="font-size: 16px; color: #555; text-decoration: underline;">Download ${item.name}</a></li>`
+  )
+  .join("");
 
     await resend.emails.send({
       from: "Mbar Type <info@mbartype.com>",
       to: customerEmail,
       subject: "Your font files are ready to download — Mbar Type",
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-          <h1 style="font-size: 24px; margin-bottom: 8px;">Thank you for your purchase!</h1>
-          <p style="color: #555; margin-bottom: 32px;">Your fonts are ready to download. Click the links below to get your files.</p>
-          <ul style="list-style: none; padding: 0; margin: 0 0 32px;">
-            ${downloadLinks}
-          </ul>
-          <p style="color: #888; font-size: 14px;">If you have any questions, contact us at info@mbartype.com</p>
-          <p style="color: #888; font-size: 14px; margin-top: 8px;">— Mbar Type</p>
-        </div>
-      `,
+html: `
+  <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 48px 32px; color: #111110;">
+    <h1 style="font-size: 28px; font-weight: 600; margin: 0 0 16px; letter-spacing: -0.02em;">Thank you for your purchase!</h1>
+    <p style="font-size: 16px; color: #555; margin: 0 0 40px; line-height: 1.5;">Your fonts are ready to download. Click the links below to get your files.</p>
+    <ul style="list-style: none; padding: 0; margin: 0 0 40px;">
+      ${downloadLinks}
+    </ul>
+    <p style="font-size: 16px; color: #555; margin: 0 0 8px; line-height: 1.5;">If you have any questions, contact us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
+    <p style="font-size: 16px; color: #111110; margin: 24px 0 0;">— Mbar Type</p>
+  </div>
+`,
     });
 
     console.log("Email sent to:", customerEmail);
