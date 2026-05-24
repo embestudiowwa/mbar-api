@@ -80,7 +80,7 @@ export default async function handler(req, res) {
       .join("");
 
     await resend.emails.send({
-      from: "Mbar Type <onboarding@resend.dev>",
+      from: "Mbar Type <info@mbartype.com>",
       to: customerEmail,
       subject: "Your font files are ready to download — Mbar Type",
       html: `
