@@ -218,6 +218,7 @@ export default async function handler(req, res) {
           ${downloadSection}
           ${physicalSection}
           <p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you have any questions, contact us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
+<p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you need a VAT invoice, please reach out to us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
           <p style="font-size: 16px; color: #111110; margin: 24px 0 0;">— Mbar Type</p>
         </div>
       `,
