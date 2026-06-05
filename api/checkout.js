@@ -60,147 +60,139 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const contentType = req.headers["content-type"] || "";
+  const rawBody = await getRawBody(req);
+  const stripeSignature = req.headers["stripe-signature"];
 
-  // ─── CHECKOUT SESSION CREATION (from CartPage) ───────────────────────────
-  if (contentType.includes("application/json")) {
-    let body;
+  // ─── WEBHOOK HANDLER (from Stripe — has stripe-signature header) ─────────
+  if (stripeSignature) {
+    let event;
     try {
-      const rawBody = await getRawBody(req);
-      body = JSON.parse(rawBody.toString());
+      event = stripe.webhooks.constructEvent(
+        rawBody,
+        stripeSignature,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
     } catch (err) {
-      return res.status(400).json({ error: "Invalid JSON" });
+      console.error("Webhook error:", err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    const { cart, email, country, discountRate, successUrl, cancelUrl } = body;
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+      const customerEmail = session.customer_details?.email || session.customer_email;
 
-    if (!cart || cart.length === 0) {
-      return res.status(400).json({ error: "Empty cart" });
-    }
+      if (!customerEmail) {
+        return res.status(400).json({ error: "No customer email" });
+      }
 
-    try {
-      const lineItems = cart.map((item) => ({
-        price_data: {
-          currency: "eur",
-          product_data: { name: item.name },
-          unit_amount: Math.round(item.price * 100),
-        },
-        quantity: item.quantity || 1,
-      }));
-
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: lineItems,
-        mode: "payment",
-        customer_email: email,
-        success_url: successUrl || "https://mbartype.com/fonts",
-        cancel_url: cancelUrl || "https://mbartype.com/buy/cart-page",
-        metadata: {
-          cart: JSON.stringify(cart.map((i) => i.fontId || i.name)),
-        },
+      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+        expand: ["data.price.product"],
       });
 
-      return res.status(200).json({ url: session.url });
-    } catch (err) {
-      console.error("Stripe session error:", err.message);
-      return res.status(500).json({ error: err.message });
-    }
-  }
+      const digitalItems = [];
+      const physicalItems = [];
 
-  // ─── WEBHOOK HANDLER (from Stripe) ──────────────────────────────────────
-  const sig = req.headers["stripe-signature"];
-  const rawBody = await getRawBody(req);
-
-  let event;
-  try {
-    event = stripe.webhooks.constructEvent(
-      rawBody,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-  } catch (err) {
-    console.error("Webhook error:", err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
-
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
-    const customerEmail = session.customer_details?.email || session.customer_email;
-
-    if (!customerEmail) {
-      return res.status(400).json({ error: "No customer email" });
-    }
-
-    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-      expand: ["data.price.product"],
-    });
-
-    const digitalItems = [];
-    const physicalItems = [];
-
-    lineItems.data.forEach((item) => {
-      const productId = item.price?.product?.id;
-      if (productId && PHYSICAL_PRODUCTS.has(productId)) {
-        physicalItems.push(item.price?.product?.name || "Physical product");
-      } else if (productId && PRODUCT_LINKS[productId]) {
-        digitalItems.push(PRODUCT_LINKS[productId]);
-      } else {
-        // For items created via price_data (from CartPage), use name from line item
-        const itemName = item.description || item.price?.product?.name;
-        if (itemName) {
-          // Try to match by name
-          const match = Object.values(PRODUCT_LINKS).find(p => p.name === itemName);
-          if (match) digitalItems.push(match);
+      lineItems.data.forEach((item) => {
+        const productId = item.price?.product?.id;
+        if (productId && PHYSICAL_PRODUCTS.has(productId)) {
+          physicalItems.push(item.price?.product?.name || "Physical product");
+        } else if (productId && PRODUCT_LINKS[productId]) {
+          digitalItems.push(PRODUCT_LINKS[productId]);
+        } else {
+          const itemName = item.description || item.price?.product?.name;
+          if (itemName) {
+            const match = Object.values(PRODUCT_LINKS).find(p => p.name === itemName);
+            if (match) digitalItems.push(match);
+          }
         }
-      }
-    });
+      });
 
-    if (digitalItems.length === 0 && physicalItems.length === 0) {
-      console.log("No matching products for:", session.id);
-      return res.status(200).json({ message: "No matching products" });
+      if (digitalItems.length === 0 && physicalItems.length === 0) {
+        console.log("No matching products for:", session.id);
+        return res.status(200).json({ message: "No matching products" });
+      }
+
+      const downloadSection = digitalItems.length > 0 ? `
+        <p style="font-size: 16px; color: #555555; margin: 0 0 16px; line-height: 1.5;">Your fonts are ready to download:</p>
+        <ul style="list-style: none; padding: 0; margin: 0 0 40px;">
+          ${digitalItems.map((item) => `
+            <li style="margin-bottom: 20px;">
+              <p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${item.name}</p>
+              <a href="${item.url}" style="font-size: 16px; color: #555555; text-decoration: underline;">Download ${item.name}</a>
+            </li>`).join("")}
+        </ul>` : "";
+
+      const physicalSection = physicalItems.length > 0 ? `
+        <p style="font-size: 16px; color: #555555; margin: 0 0 16px; line-height: 1.5;">Your physical order:</p>
+        <ul style="list-style: none; padding: 0; margin: 0 0 24px;">
+          ${physicalItems.map((name) => `
+            <li style="margin-bottom: 12px;">
+              <p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${name}</p>
+              <p style="font-size: 16px; color: #555555; margin: 0;">Will be shipped within 3 business days. We'll reach out to confirm your shipping address.</p>
+            </li>`).join("")}
+        </ul>` : "";
+
+      await resend.emails.send({
+        from: "Mbar Type <info@mbartype.com>",
+        to: customerEmail,
+        subject: "Your order confirmation — Mbar Type",
+        html: `
+          <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 48px 32px; color: #111110;">
+            <h1 style="font-size: 28px; font-weight: 600; margin: 0 0 16px; letter-spacing: -0.02em;">Thank you for your purchase!</h1>
+            ${downloadSection}
+            ${physicalSection}
+            <p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you have any questions, contact us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
+            <p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you need a VAT invoice, please reach out to us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
+            <p style="font-size: 16px; color: #111110; margin: 24px 0 0;">— Mbar Type</p>
+          </div>
+        `,
+      });
+
+      console.log("Email sent to:", customerEmail);
+      return res.status(200).json({ message: "Email sent" });
     }
 
-    const downloadSection = digitalItems.length > 0 ? `
-      <p style="font-size: 16px; color: #555555; margin: 0 0 16px; line-height: 1.5;">Your fonts are ready to download:</p>
-      <ul style="list-style: none; padding: 0; margin: 0 0 40px;">
-        ${digitalItems.map((item) => `
-          <li style="margin-bottom: 20px;">
-            <p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${item.name}</p>
-            <a href="${item.url}" style="font-size: 16px; color: #555555; text-decoration: underline;">Download ${item.name}</a>
-          </li>`).join("")}
-      </ul>` : "";
-
-    const physicalSection = physicalItems.length > 0 ? `
-      <p style="font-size: 16px; color: #555555; margin: 0 0 16px; line-height: 1.5;">Your physical order:</p>
-      <ul style="list-style: none; padding: 0; margin: 0 0 24px;">
-        ${physicalItems.map((name) => `
-          <li style="margin-bottom: 12px;">
-            <p style="font-size: 16px; font-weight: 600; margin: 0 0 4px; color: #111110;">${name}</p>
-            <p style="font-size: 16px; color: #555555; margin: 0;">Will be shipped within 3 business days. We'll reach out to confirm your shipping address.</p>
-          </li>`).join("")}
-      </ul>` : "";
-
-    await resend.emails.send({
-      from: "Mbar Type <info@mbartype.com>",
-      to: customerEmail,
-      subject: "Your order confirmation — Mbar Type",
-      html: `
-        <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 48px 32px; color: #111110;">
-          <h1 style="font-size: 28px; font-weight: 600; margin: 0 0 16px; letter-spacing: -0.02em;">Thank you for your purchase!</h1>
-          ${downloadSection}
-          ${physicalSection}
-          <p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you have any questions, contact us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
-          <p style="font-size: 16px; color: #111110; margin: 0 0 8px; line-height: 1.5;">If you need a VAT invoice, please reach out to us at <a href="mailto:info@mbartype.com" style="color: #111110;">info@mbartype.com</a></p>
-          <p style="font-size: 16px; color: #111110; margin: 24px 0 0;">— Mbar Type</p>
-        </div>
-      `,
-    });
-
-    console.log("Email sent to:", customerEmail);
-    return res.status(200).json({ message: "Email sent" });
+    return res.status(200).json({ received: true });
   }
 
-  return res.status(200).json({ received: true });
+  // ─── CHECKOUT SESSION CREATION (from CartPage — no stripe-signature) ─────
+  let body;
+  try {
+    body = JSON.parse(rawBody.toString());
+  } catch (err) {
+    return res.status(400).json({ error: "Invalid JSON" });
+  }
+
+  const { cart, email, successUrl, cancelUrl } = body;
+
+  if (!cart || cart.length === 0) {
+    return res.status(400).json({ error: "Empty cart" });
+  }
+
+  try {
+    const lineItems = cart.map((item) => ({
+      price_data: {
+        currency: "eur",
+        product_data: { name: item.name },
+        unit_amount: Math.round(item.price * 100),
+      },
+      quantity: item.quantity || 1,
+    }));
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      customer_email: email,
+      success_url: successUrl || "https://mbartype.com/fonts",
+      cancel_url: cancelUrl || "https://mbartype.com/buy/cart-page",
+    });
+
+    return res.status(200).json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe session error:", err.message);
+    return res.status(500).json({ error: err.message });
+  }
 }
 
 export const config = {
