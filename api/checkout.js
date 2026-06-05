@@ -38,6 +38,13 @@ const PRODUCT_LINKS = {
   prod_UYyoaBaln9ZxEI: { name: "Kidcut", url: "https://www.dropbox.com/scl/fi/jek16j9e4ejl6lo54coel/Kidcut.zip?rlkey=tdzbsw00na9wdsd2p2plb8gdz&st=30qdwuen&dl=1" },
 };
 
+// Mapping fontId from cart metadata to download links
+const FONTID_TO_LINKS = {
+  nostrand: [PRODUCT_LINKS["prod_UYynxMKGt1CPwd"]],
+  milkybar: [PRODUCT_LINKS["prod_UYyo3NX7WRMdE8"]],
+  kidcut: [PRODUCT_LINKS["prod_UYyoaBaln9ZxEI"]],
+};
+
 async function getRawBody(req) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -63,7 +70,7 @@ export default async function handler(req, res) {
   const rawBody = await getRawBody(req);
   const stripeSignature = req.headers["stripe-signature"];
 
-  // ─── WEBHOOK HANDLER (from Stripe — has stripe-signature header) ─────────
+  // ─── WEBHOOK HANDLER (from Stripe) ──────────────────────────────────────
   if (stripeSignature) {
     let event;
     try {
@@ -85,27 +92,46 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "No customer email" });
       }
 
-      const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
-        expand: ["data.price.product"],
-      });
-
       const digitalItems = [];
       const physicalItems = [];
 
-      lineItems.data.forEach((item) => {
-        const productId = item.price?.product?.id;
-        if (productId && PHYSICAL_PRODUCTS.has(productId)) {
-          physicalItems.push(item.price?.product?.name || "Physical product");
-        } else if (productId && PRODUCT_LINKS[productId]) {
-          digitalItems.push(PRODUCT_LINKS[productId]);
-        } else {
+      // First try: match by fontId from cart metadata
+      const cartMeta = session.metadata?.cart;
+      if (cartMeta) {
+        try {
+          const cartItems = JSON.parse(cartMeta);
+          cartItems.forEach((fontId) => {
+            if (typeof fontId === "string") {
+              const links = FONTID_TO_LINKS[fontId.toLowerCase()];
+              if (links) {
+                links.forEach(l => digitalItems.push(l));
+              }
+            }
+          });
+        } catch (e) {
+          console.error("Error parsing cart metadata:", e);
+        }
+      }
+
+      // Second try: match by prod_ ID or name from line items
+      if (digitalItems.length === 0 && physicalItems.length === 0) {
+        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+          expand: ["data.price.product"],
+        });
+
+        lineItems.data.forEach((item) => {
+          const productId = item.price?.product?.id;
           const itemName = item.description || item.price?.product?.name;
-          if (itemName) {
+          if (productId && PHYSICAL_PRODUCTS.has(productId)) {
+            physicalItems.push(item.price?.product?.name || "Physical product");
+          } else if (productId && PRODUCT_LINKS[productId]) {
+            digitalItems.push(PRODUCT_LINKS[productId]);
+          } else if (itemName) {
             const match = Object.values(PRODUCT_LINKS).find(p => p.name === itemName);
             if (match) digitalItems.push(match);
           }
-        }
-      });
+        });
+      }
 
       if (digitalItems.length === 0 && physicalItems.length === 0) {
         console.log("No matching products for:", session.id);
@@ -155,7 +181,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ received: true });
   }
 
-  // ─── CHECKOUT SESSION CREATION (from CartPage — no stripe-signature) ─────
+  // ─── CHECKOUT SESSION CREATION (from CartPage) ───────────────────────────
   let body;
   try {
     body = JSON.parse(rawBody.toString());
@@ -179,6 +205,9 @@ export default async function handler(req, res) {
       quantity: item.quantity || 1,
     }));
 
+    // Store fontIds in metadata for webhook matching
+    const fontIds = cart.map((item) => item.fontId || item.name);
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
@@ -186,6 +215,9 @@ export default async function handler(req, res) {
       customer_email: email,
       success_url: successUrl || "https://mbartype.com/fonts",
       cancel_url: cancelUrl || "https://mbartype.com/buy/cart-page",
+      metadata: {
+        cart: JSON.stringify(fontIds),
+      },
     });
 
     return res.status(200).json({ url: session.url });
