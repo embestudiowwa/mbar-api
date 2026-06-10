@@ -202,7 +202,7 @@ export default async function handler(req, res) {
     const fontIds = cart.map((item) => item.fontId || item.name);
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      automatic_payment_methods: { enabled: true },
       line_items: lineItems,
       mode: "payment",
       customer_email: email,
