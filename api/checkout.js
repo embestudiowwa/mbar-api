@@ -31,13 +31,13 @@ const PRODUCT_LINKS = {
   prod_UeHkb6xJlbYx8U: { name: "Nostrand · Black Oblique", url: "https://www.dropbox.com/scl/fi/zoxvp9ww1dme3ewhvof8m/Nostrand-BlackOblique.zip?rlkey=5sp65l9xqdv7zn7oolq26qudh&st=gizeufgt&dl=1" },
 
   // ─── MILKY BAR ───────────────────────────────────────────────────────────────
-  prod_UYyo3NX7WRMdE8: { name: "Milky Bar · Full Family", url: "https://www.dropbox.com/scl/fi/optzsbazn53lncoogzscn/MilkyBar-FullFamily.zip?rlkey=31jurhtk1vtu3dadbj0szexuf&st=z9dzvigw&dl=1" },
-  prod_UeHbTj0CTFTkq6: { name: "Milky Bar · Normal (Soft + Sharp)", url: "https://www.dropbox.com/scl/fi/ufgc3gdt3nrpxmikmeyo1/MilkyBar-Normal.zip?rlkey=4wz2twj0hn5ohh5enm312unds&st=rs0zqu6u&dl=1" },
-  prod_UeHdGzumW1YMv1: { name: "Milky Bar · Oblique", url: "https://www.dropbox.com/scl/fi/kn29e8sxpp3i1hewth2b7/MilkyBar-Oblique.zip?rlkey=8vwrs0hxcwhblbngqhabriqg0&st=kjgzsgu0&dl=1" },
-  prod_UeHd6aAMEpQg9w: { name: "Milky Bar · Soft", url: "https://www.dropbox.com/scl/fi/gyz175p4v4puik7sm6a1i/MilkyBar-Soft.zip?rlkey=hyv2kfcl7u0mwaus8zwz1buez&st=t4aydm2p&dl=1" },
-  prod_UeHeftJxobTD5W: { name: "Milky Bar · Soft Oblique", url: "https://www.dropbox.com/scl/fi/h9k64evad7ipk8u0v58oi/MilkyBar-SoftOblique.zip?rlkey=poz9p4iq5e48oul6ip30lvf0u&st=o4bnelzu&dl=1" },
-  prod_UeHdW1YbQD9eUd: { name: "Milky Bar · Sharp", url: "https://www.dropbox.com/scl/fi/oiy3q70ba4nkl25fm9fjn/MilkyBar-Sharp.zip?rlkey=7cddm5lgacvo9bopvr8r2snqu&st=lpfj8gx6&dl=1" },
-  prod_UeHdGqirSFaMsy: { name: "Milky Bar · Sharp Oblique", url: "https://www.dropbox.com/scl/fi/ilgyel60je700pp6akndy/MilkyBar-SharpOblique.zip?rlkey=i98smlc0p5s5smporfclh8of9&st=xmptisy5&dl=1" },
+  prod_UYyo3NX7WRMdE8: { name: "Milky Bar · Full Family", url: "https://www.dropbox.com/scl/fi/as8x3zkthbibv25dr18k4/MilkyBar-FullFamily.zip?rlkey=jo3dj28ntm0g07x7c6u7g3css&st=5xmo5jjv&dl=1" },
+  prod_UeHbTj0CTFTkq6: { name: "Milky Bar · Normal (Soft + Sharp)", url: "https://www.dropbox.com/scl/fi/cwrtjls2b6gdlsf0b8ae1/MilkyBar-Normal.zip?rlkey=97nzszpy0l170661n1azxe6ju&st=tckk8ppt&dl=1" },
+  prod_UeHdGzumW1YMv1: { name: "Milky Bar · Oblique (Soft + Sharp)", url: "https://www.dropbox.com/scl/fi/cwrtjls2b6gdlsf0b8ae1/MilkyBar-Normal.zip?rlkey=97nzszpy0l170661n1azxe6ju&st=tckk8ppt&dl=1" },
+  prod_UeHd6aAMEpQg9w: { name: "Milky Bar · Soft", url: "https://www.dropbox.com/scl/fi/c9681kqh4iataiuzi4pqe/MilkyBar-Soft.zip?rlkey=a4ixbisjmvwyzhqc7nlexyeik&st=ucx56yep&dl=1" },
+  prod_UeHeftJxobTD5W: { name: "Milky Bar · Soft Oblique", url: "https://www.dropbox.com/scl/fi/fq8qk4850ujg80qi220yp/MilkyBar-SoftOblique.zip?rlkey=82mulmq74vi9iux83wcxd4bsv&st=x94k3mfk&dl=1" },
+  prod_UeHdW1YbQD9eUd: { name: "Milky Bar · Sharp", url: "https://www.dropbox.com/scl/fi/q2f8kuswu71iqlmiqwed9/MilkyBar-Sharp.zip?rlkey=b1arj9nhzh1renzwznjg8adrj&st=e4pbws73&dl=1" },
+  prod_UeHdGqirSFaMsy: { name: "Milky Bar · Sharp Oblique", url: "https://www.dropbox.com/scl/fi/62m3nq07oc2zb8wh5uvvp/MilkyBar-SharpOblique.zip?rlkey=bxxuowgp1v5fbzie28zkvnoks&st=4v0hdtd1&dl=1" },
 
   // ─── KIDCUT ──────────────────────────────────────────────────────────────────
   prod_UYyoaBaln9ZxEI: { name: "Kidcut", url: "https://www.dropbox.com/scl/fi/jek16j9e4ejl6lo54coel/Kidcut.zip?rlkey=tdzbsw00na9wdsd2p2plb8gdz&st=30qdwuen&dl=1" },
