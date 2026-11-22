@@ -8,27 +8,27 @@ const PHYSICAL_PRODUCTS = new Set(["prod_UeHxKirwa5YYwZ"]);
 
 const PRODUCT_LINKS = {
   // ─── NOSTRAND ───────────────────────────────────────────────────────────────
-  prod_UYynxMKGt1CPwd: { name: "Nostrand · Full Family", url: "https://www.dropbox.com/scl/fi/zmimxubmqc8fff8a1yqwk/Nostrand-FullFamily.zip?rlkey=p9pn2vbazh7yozwvb6drhmffm&st=rbe15uw7&dl=1" },
-  prod_UeHl16vW1YrM6B: { name: "Nostrand · Normal (9 styles)", url: "https://www.dropbox.com/scl/fi/ofpwf99dw8wjk1cr03sly/Nostrand-MediumOblique.zip?rlkey=apdbbkdfc92qkdkg77hqmrxpi&st=rxwzw9bt&dl=1" },
-  prod_UeHlFumQCKC2NW: { name: "Nostrand · Oblique (9 styles)", url: "https://www.dropbox.com/scl/fi/k4zvpuuoqp3qkpni7urdr/Nostrand-Oblique.zip?rlkey=i5z8n5m5nmr5avfiuh85bu724&st=ryvc8ziz&dl=1" },
-  prod_UeHgSFGWDutmL4: { name: "Nostrand · Thin", url: "https://www.dropbox.com/scl/fi/9hk4724x3zwa1ftnp6sjs/Nostrand-Thin.zip?rlkey=1odg0vwcgzj54zkqsq8cwk0xt&st=qh5azc9k&dl=1" },
-  prod_UeHgPfSzl8VGcp: { name: "Nostrand · Thin Oblique", url: "https://www.dropbox.com/scl/fi/wtbf5csipt1bfqduqqk0j/Nostrand-ThinOblique.zip?rlkey=ekdygpdgvts4g1fycka9u2cp7&st=j3z9t3gr&dl=1" },
-  prod_UeHgWJ1mgsYY44: { name: "Nostrand · ExtraLight", url: "https://www.dropbox.com/scl/fi/kl7yu7lhedddkp2y3kg7s/Nostrand-ExtraLight.zip?rlkey=gs51umjnghguhsuo95kk2q40r&st=86agd833&dl=1" },
-  prod_UeHhYPa7QAxxmT: { name: "Nostrand · ExtraLight Oblique", url: "https://www.dropbox.com/scl/fi/2w3b7ru4sp9dywvgdfm7g/Nostrand-ExtraLightOblique.zip?rlkey=tb1m7ei1a2urwj9ahmifibbz1&st=qwrbevr4&dl=1" },
-  prod_UeHhs9twBZOYKv: { name: "Nostrand · Light", url: "https://www.dropbox.com/scl/fi/zk28hfigelgu5x0z08xbu/Nostrand-Light.zip?rlkey=4gy6pnmsqx5rno6mk0p48ycl9&st=uo6b4xx1&dl=1" },
-  prod_UeHhB2Qzf8jqq2: { name: "Nostrand · Light Oblique", url: "https://www.dropbox.com/scl/fi/y844ikya5ks183ogulb8o/Nostrand-LightOblique.zip?rlkey=nf23tw9jr4alwrr6bgnshlopl&st=enwud3bp&dl=1" },
-  prod_UeHhpLZXUVY7G4: { name: "Nostrand · Regular", url: "https://www.dropbox.com/scl/fi/jc489ih54s1wrykzcd75j/Nostrand-Regular.zip?rlkey=kchn45py2zz7vzans72qcbrae&st=dmq1odnr&dl=1" },
-  prod_UeHiH27g7Yiiwz: { name: "Nostrand · Regular Oblique", url: "https://www.dropbox.com/scl/fi/cy23xwvajmxdpw0eulwej/Nostrand-RegularOblique.zip?rlkey=4beq4wn5owcxuiw9fjg7uedl9&st=mayotfo1&dl=1" },
-  prod_UeHilIjKSTuuaJ: { name: "Nostrand · Medium", url: "https://www.dropbox.com/scl/fi/o0d1r5k6dprc3qry30m8d/Nostrand-Medium.zip?rlkey=1lmtdk9ttv71qknkv7755sa2z&st=8kq5y832&dl=1" },
-  prod_UeHinzJhhlZMcb: { name: "Nostrand · Medium Oblique", url: "https://www.dropbox.com/scl/fi/ofpwf99dw8wjk1cr03sly/Nostrand-MediumOblique.zip?rlkey=apdbbkdfc92qkdkg77hqmrxpi&st=rxwzw9bt&dl=1" },
-  prod_UeHj4w7NhdU2Rg: { name: "Nostrand · SemiBold", url: "https://www.dropbox.com/scl/fi/cy23xwvajmxdpw0eulwej/Nostrand-RegularOblique.zip?rlkey=4beq4wn5owcxuiw9fjg7uedl9&st=mayotfo1&dl=1" },
-  prod_UeHjo3E11aeJ4G: { name: "Nostrand · SemiBold Oblique", url: "https://www.dropbox.com/scl/fi/9syu250bslbxanagwkgjj/Nostrand-SemiBoldOblique.zip?rlkey=u7lqqmtsq5ljacj5fhvwtvhc6&st=3gk5kxcg&dl=1" },
-  prod_UeHjV2QoaGp7aM: { name: "Nostrand · Bold", url: "https://www.dropbox.com/scl/fi/e7md6biwsy7ph0qz93o00/Nostrand-Bold.zip?rlkey=ycd8f4op7ibhrlikgivfqcyym&st=mtfiazkl&dl=1" },
-  prod_UeHjIdjc1yAlc6: { name: "Nostrand · Bold Oblique", url: "https://www.dropbox.com/scl/fi/mv08s1u270yys9xaia8lt/Nostrand-BoldOblique.zip?rlkey=27z6lqgby2a69czv7z2tbgjga&st=d1em0yaf&dl=1" },
-  prod_UeHkdkTzmZmUvy: { name: "Nostrand · ExtraBold", url: "https://www.dropbox.com/scl/fi/9iibn6sz6cbv0dtef0e96/Nostrand-ExtraBold.zip?rlkey=mafshwf2d0yspu79ywgx9jkkn&st=dqwnutno&dl=1" },
-  prod_UeHkJqOz6t27sS: { name: "Nostrand · ExtraBold Oblique", url: "https://www.dropbox.com/scl/fi/6ix33m256xb55yfiz34td/Nostrand-ExtraBoldOblique.zip?rlkey=3yfmr3r57j660yrgx8dt4ocyd&st=so6r3h1u&dl=1" },
-  prod_UeHkPkRHqpiPvM: { name: "Nostrand · Black", url: "https://www.dropbox.com/scl/fi/bkklgarwgnckflyhl02ar/Nostrand-Black.zip?rlkey=wsd383yyyr5tjwwa6k95duupn&st=2dm89bj8&dl=1" },
-  prod_UeHkb6xJlbYx8U: { name: "Nostrand · Black Oblique", url: "https://www.dropbox.com/scl/fi/v72bm4xo86i0p040rudiy/Nostrand-BlackOblique.zip?rlkey=8az4e3omcsnw93h2shydh4d43&st=dblmy8r5&dl=1" },
+  prod_UYynxMKGt1CPwd: { name: "Nostrand · Full Family", url: "https://www.dropbox.com/scl/fi/wzygruzzmvmp30783sh6x/Nostrand-FullFamily-Variable.zip?rlkey=v8jg8c4d1rab3hjvk83x4mxch&st=aechhxcz&dl=1" },
+  prod_UeHl16vW1YrM6B: { name: "Nostrand · Normal (9 styles)", url: "https://www.dropbox.com/scl/fi/bf1tr7vsr9dhrfbvgdl7u/Nostrand-Normal-9-styles.zip?rlkey=hqwbt8b2a6aw90k4ktz9bkvct&st=loancmkh&dl=1" },
+  prod_UeHlFumQCKC2NW: { name: "Nostrand · Oblique (9 styles)", url: "https://www.dropbox.com/scl/fi/mny2k9gb2o4qg487q3vi0/Nostrand-Oblique-9-styles.zip?rlkey=kux45gptnbpern564tlencess&st=mo9uoxyx&dl=1" },
+  prod_UeHgSFGWDutmL4: { name: "Nostrand · Thin", url: "https://www.dropbox.com/scl/fi/f17g4h4htof0ccqkh003j/Nostrand-Thin.zip?rlkey=jcdhhnuk30eeyr61u0c9m6mr3&st=9s0ijr7q&dl=1" },
+  prod_UeHgPfSzl8VGcp: { name: "Nostrand · Thin Oblique", url: "https://www.dropbox.com/scl/fi/928ct3fpdwci8bxjqx4tz/Nostrand-ThinOblique.zip?rlkey=xis7m29bx63skxjiozhzts5r2&st=ya7n5hx8&dl=1" },
+  prod_UeHgWJ1mgsYY44: { name: "Nostrand · ExtraLight", url: "https://www.dropbox.com/scl/fi/b7go8fbvgza3o6r23lmwu/Nostrand-ExtraLight.zip?rlkey=ta3qngkb7qjbbjb7n9zvg4kei&st=8vxps35m&dl=1" },
+  prod_UeHhYPa7QAxxmT: { name: "Nostrand · ExtraLight Oblique", url: "https://www.dropbox.com/scl/fi/glncthwqut06vvq9hao55/Nostrand-ExtraLightOblique.zip?rlkey=5izccyyvf0keq1655mrkbrpu3&st=adzefvkx&dl=1" },
+  prod_UeHhs9twBZOYKv: { name: "Nostrand · Light", url: "https://www.dropbox.com/scl/fi/1br40blc3h3v1r2gv6sh8/Nostrand-Light.zip?rlkey=eu65g0mysceu8xvga6042tluj&st=q7yqorwr&dl=1" },
+  prod_UeHhB2Qzf8jqq2: { name: "Nostrand · Light Oblique", url: "https://www.dropbox.com/scl/fi/f4xo74wlykdxskxvo4453/Nostrand-LightOblique.zip?rlkey=tduildzh3lj70y4ngoygng13u&st=5aaus6pe&dl=1" },
+  prod_UeHhpLZXUVY7G4: { name: "Nostrand · Regular", url: "https://www.dropbox.com/scl/fi/8tfxfnuj3ty54i5gy4ufp/Nostrand-Regular.zip?rlkey=jb5ihzfp7hxgduspd1zca1sid&st=w5dvmbjs&dl=0" },
+  prod_UeHiH27g7Yiiwz: { name: "Nostrand · Regular Oblique", url: "https://www.dropbox.com/scl/fi/5gdsf5tg1r8wki5vkl2gy/Nostrand-RegularOblique.zip?rlkey=xhycz5g2fms989xrnun3n0xon&st=2ol5np4c&dl=1" },
+  prod_UeHilIjKSTuuaJ: { name: "Nostrand · Medium", url: "https://www.dropbox.com/scl/fi/5t0d81cn2686avfk2r9ii/Nostrand-Medium.zip?rlkey=c2kzjzaniji8nw8jllwepfgfw&st=7m348rdm&dl=1" },
+  prod_UeHinzJhhlZMcb: { name: "Nostrand · Medium Oblique", url: "https://www.dropbox.com/scl/fi/xklv2g2nout7xavh7krkl/Nostrand-MediumOblique.zip?rlkey=43brumq51kc593tzsaqga2qfq&st=dxwsjhd5&dl=1" },
+  prod_UeHj4w7NhdU2Rg: { name: "Nostrand · SemiBold", url: "https://www.dropbox.com/scl/fi/kiyxmtao5ns2tnp4nk02t/Nostrand-SemiBold.zip?rlkey=rtpsvngkpbqfql335eauf7fyo&st=10rut2us&dl=1" },
+  prod_UeHjo3E11aeJ4G: { name: "Nostrand · SemiBold Oblique", url: "https://www.dropbox.com/scl/fi/167pz9nu7qkmqlxd7tjjn/Nostrand-SemiBoldOblique.zip?rlkey=4wun0181b9ub4frx2wscnuvh2&st=qyev69ra&dl=1" },
+  prod_UeHjV2QoaGp7aM: { name: "Nostrand · Bold", url: "https://www.dropbox.com/scl/fi/hy1py0p37dtqvhdzajlo8/Nostrand-Bold.zip?rlkey=fvketovobw2s3n3ijgqvz4crp&st=jyxdltdz&dl=1" },
+  prod_UeHjIdjc1yAlc6: { name: "Nostrand · Bold Oblique", url: "https://www.dropbox.com/scl/fi/gx47318tsnp6suzgn7mbn/Nostrand-BoldOblique.zip?rlkey=63q6l1q346r0tiwq9eae06po2&st=3yyu73wc&dl=1" },
+  prod_UeHkdkTzmZmUvy: { name: "Nostrand · ExtraBold", url: "https://www.dropbox.com/scl/fi/46qvp851wgiao6f0l5y84/Nostrand-ExtraBold.zip?rlkey=5336m41pt1xn2owm21ymj4e1g&st=fwrss87m&dl=1" },
+  prod_UeHkJqOz6t27sS: { name: "Nostrand · ExtraBold Oblique", url: "https://www.dropbox.com/scl/fi/unumh7sleq7vj3ojenu3l/Nostrand-ExtraBoldOblique.zip?rlkey=c145t5lis45wtzu814jv8pcbb&st=xv3sk9qs&dl=1" },
+  prod_UeHkPkRHqpiPvM: { name: "Nostrand · Black", url: "https://www.dropbox.com/scl/fi/zsoga4b7esb03apo78duk/Nostrand-Black.zip?rlkey=mgbzpodywhwhuew2d292o6luf&st=5h3y4zej&dl=1" },
+  prod_UeHkb6xJlbYx8U: { name: "Nostrand · Black Oblique", url: "https://www.dropbox.com/scl/fi/cd9x92uyjpexb1zsfe4t2/Nostrand-BlackOblique.zip?rlkey=0lfkt8m3wlam9xuvldmzaru3p&st=k11612ka&dl=1" },
 
   // ─── MILKY BAR ───────────────────────────────────────────────────────────────
   prod_UYyo3NX7WRMdE8: { name: "Milky Bar · Full Family", url: "https://www.dropbox.com/scl/fi/34rvurnlqm8nywdoigaj5/MilkyBar-FullFamily.zip?rlkey=37abykym3c4afk3pba9u1lpgj&st=4x0kh8re&dl=1" },
@@ -43,12 +43,42 @@ const PRODUCT_LINKS = {
   prod_UYyoaBaln9ZxEI: { name: "Kidcut", url: "https://www.dropbox.com/scl/fi/jek16j9e4ejl6lo54coel/Kidcut.zip?rlkey=tdzbsw00na9wdsd2p2plb8gdz&st=30qdwuen&dl=1" },
 };
 
-// Mapping fontId from cart metadata to download links
-const FONTID_TO_LINKS = {
-  nostrand: [PRODUCT_LINKS["prod_UYynxMKGt1CPwd"]],
-  milkybar: [PRODUCT_LINKS["prod_UYyo3NX7WRMdE8"]],
-  kidcut: [PRODUCT_LINKS["prod_UYyoaBaln9ZxEI"]],
+const BAR_SADY = {
+  name: "Bar Sady · Full Family",
+  url: "https://www.dropbox.com/scl/fi/igszpqsx118sni6dqpdri/BarSady-FullFamily-Variable.zip?rlkey=u9efa48jfvt3ezlqcyal6t8lx&st=isxuqmrj&dl=1",
 };
+
+const DOWNLOADS = { ...PRODUCT_LINKS, barsady: BAR_SADY };
+
+function productKey(name) {
+  const normalize = (value) => value.toLowerCase().replace(/ · /g, " ").trim();
+  const target = normalize(name);
+  return Object.keys(DOWNLOADS).find((id) => normalize(DOWNLOADS[id].name) === target);
+}
+
+function downloadKeys(item) {
+  const family = item.fontId?.toLowerCase();
+  if (family === "barsady") return ["barsady"];
+
+  if (family === "nostrand") {
+    if (item.name === "Normal") return ["prod_UeHl16vW1YrM6B"];
+    if (item.name === "Oblique") return ["prod_UeHlFumQCKC2NW"];
+
+    const styles = /^\d+ styles: (.+)$/.exec(item.styles || "")?.[1];
+    if (styles) {
+      const keys = styles.split(", ").map((style) => productKey("Nostrand " + style));
+      return keys.every(Boolean) ? keys : [];
+    }
+    const key = productKey(item.name);
+    return key && PRODUCT_LINKS[key]?.name.startsWith("Nostrand · ") ? [key] : [];
+  }
+
+  const key = productKey(item.name);
+  if (key) return [key];
+  if (family === "milkybar") return ["prod_UYyo3NX7WRMdE8"];
+  if (family === "kidcut") return ["prod_UYyoaBaln9ZxEI"];
+  return [];
+}
 
 async function getRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -95,37 +125,28 @@ export default async function handler(req, res) {
       const digitalItems = [];
       const physicalItems = [];
 
-      const cartMeta = session.metadata?.cart;
-      if (cartMeta) {
-        try {
-          const cartItems = JSON.parse(cartMeta);
-          cartItems.forEach((fontId) => {
-            if (typeof fontId === "string") {
-              const links = FONTID_TO_LINKS[fontId.toLowerCase()];
-              if (links) {
-                links.forEach(l => digitalItems.push(l));
-              }
-            }
-          });
-        } catch (e) {
-          console.error("Error parsing cart metadata:", e);
+      const delivered = new Set();
+      const lineItems = stripe.checkout.sessions.listLineItems(session.id, {
+        expand: ["data.price.product"],
+        limit: 100,
+      });
+      for await (const item of lineItems) {
+        const product = item.price?.product;
+        const productId = typeof product === "string" ? product : product?.id;
+        if (PHYSICAL_PRODUCTS.has(productId)) {
+          physicalItems.push(product?.name || item.description || "Physical product");
+          continue;
         }
-      }
 
-      if (digitalItems.length === 0 && physicalItems.length === 0) {
-        const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ["data.price.product"] });
-        lineItems.data.forEach((item) => {
-          const productId = item.price?.product?.id;
-          const itemName = item.description || item.price?.product?.name;
-          if (productId && PHYSICAL_PRODUCTS.has(productId)) {
-            physicalItems.push(item.price?.product?.name || "Physical product");
-          } else if (productId && PRODUCT_LINKS[productId]) {
-            digitalItems.push(PRODUCT_LINKS[productId]);
-          } else if (itemName) {
-            const match = Object.values(PRODUCT_LINKS).find(p => p.name === itemName);
-            if (match) digitalItems.push(match);
+        const name = item.description || product?.name || "";
+        const keys = product?.metadata?.download_keys?.split(",") ||
+          (PRODUCT_LINKS[productId] ? [productId] : [productKey(name)]);
+        for (const key of keys) {
+          if (Object.hasOwn(DOWNLOADS, key) && !delivered.has(key)) {
+            delivered.add(key);
+            digitalItems.push(DOWNLOADS[key]);
           }
-        });
+        }
       }
 
       if (digitalItems.length === 0 && physicalItems.length === 0) {
@@ -190,25 +211,32 @@ export default async function handler(req, res) {
   }
 
   try {
-    const lineItems = cart.map((item) => ({
+    const keysByItem = cart.map(downloadKeys);
+    if (cart.some((item, index) => item.fontId?.toLowerCase() === "nostrand" && keysByItem[index].length === 0)) {
+      return res.status(400).json({ error: "Unknown Nostrand selection" });
+    }
+    const lineItems = cart.map((item, index) => ({
       price_data: {
         currency: "eur",
-        product_data: { name: item.name },
+        product_data: {
+          name: item.name,
+          metadata: { download_keys: keysByItem[index].join(",") },
+        },
         unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity || 1,
     }));
-
-    const fontIds = cart.map((item) => item.fontId || item.name);
+    const freeBarSadyOrder = lineItems.every((item, index) =>
+      item.price_data.unit_amount === 0 && keysByItem[index].join(",") === "barsady"
+    );
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card", "paypal", "blik"],
+      ...(freeBarSadyOrder ? {} : { payment_method_types: ["card", "paypal", "blik"] }),
       line_items: lineItems,
       mode: "payment",
       customer_email: email,
       success_url: successUrl || "https://mbartype.com/buy/cart-page?payment=success",
       cancel_url: cancelUrl || "https://mbartype.com/buy/cart-page",
-      metadata: { cart: JSON.stringify(fontIds) },
     });
 
     return res.status(200).json({ url: session.url });
